@@ -15,6 +15,16 @@ variables:
   GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
   modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 
+- task: ArchiveFiles@2
+   displayName: 'Archive Files'
+   inputs:
+     rootFolderOrFile: '$(Build.Repository.LocalPath)'     
+     includeRootFolder: False 
+- task: PublishBuildArtifacts@1
+   displayName: 'Publish Artifact'
+   inputs:
+     artifactName: drop
+
 steps:
 - script: |
     mkdir -p '$(GOBIN)'
